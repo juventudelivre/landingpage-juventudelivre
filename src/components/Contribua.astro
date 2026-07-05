@@ -64,11 +64,11 @@
         <div class="doe-cta-row reveal reveal-d2" data-reveal>
           <a
             id="doe-btn"
-            href="https://linktr.ee/juventude.livre"
+            href="https://wa.me/554192898401?text=Ol%C3%A1%2C%20quero%20contribuir%20com%20a%20Juventude%20Livre%21"
             target="_blank"
             rel="noopener noreferrer"
             class="doe-btn group"
-            aria-label="Ir para a página de doação"
+            aria-label="Ir para o WhatsApp para doação"
           >
             <span>Quero Contribuir</span>
             <span
@@ -548,12 +548,19 @@
   const btn = document.getElementById("doe-btn") as HTMLAnchorElement | null;
   const buttonText = btn?.querySelector("span:first-child");
 
+  const baseUrl = "https://wa.me/554192898401";
+
   valueInput?.addEventListener("input", () => {
-    if (!buttonText) return;
+    if (!buttonText || !btn) return;
 
     const value = valueInput.value.trim();
     buttonText.textContent = value
       ? `Quero Contribuir com R$\u00a0${value}`
       : "Quero Contribuir";
+
+    const msg = value
+      ? `Olá, quero contribuir com R$ ${value} para a Juventude Livre!`
+      : "Olá, quero contribuir com a Juventude Livre!";
+    btn.href = `${baseUrl}?text=${encodeURIComponent(msg)}`;
   });
 </script>

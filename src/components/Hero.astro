@@ -306,12 +306,21 @@
       targetY = y * -40;
     });
 
+    const isMobile = window.innerWidth < 768;
+
+    if (isMobile) {
+      video.autoplay = true;
+      video.loop = true;
+      video.play().catch(() => {});
+    }
+
     const onReady = () => {
       const duration = video.duration;
       let lastTime = -1;
 
       const renderLoop = () => {
-        if (duration && !isNaN(duration)) {
+        // Only do scroll-based seeking if not on mobile
+        if (!isMobile && duration && !isNaN(duration)) {
           const targetTime = scrollProgress * duration;
           // Evita updates redundantes para melhor performance
           if (Math.abs(targetTime - lastTime) > 0.01) {
