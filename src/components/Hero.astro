@@ -10,6 +10,8 @@
       class="hero-video"
       src="https://github.com/juventudelivre/landingpage-juventudelivre/releases/download/media-v1/hero-video.mp4"
       poster="/hero-poster.webp"
+      autoplay
+      loop
       muted
       playsinline
       preload="auto"
@@ -89,15 +91,24 @@
 <style>
   .hero-scroll-wrapper {
     position: relative;
-    height: 400vh;
+  }
+  @media (min-width: 768px) {
+    .hero-scroll-wrapper {
+      height: 400vh;
+    }
   }
 
   .hero-sticky {
-    position: sticky;
-    top: 0;
+    position: relative;
     width: 100%;
     height: 100vh;
     overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    .hero-sticky {
+      position: sticky;
+      top: 0;
+    }
   }
 
   .hero-video {
@@ -317,6 +328,11 @@
     const onReady = () => {
       const duration = video.duration;
       let lastTime = -1;
+
+      if (!isMobile) {
+        // Pausa no desktop para não conflitar com scrub de scroll
+        video.pause();
+      }
 
       const renderLoop = () => {
         // Only do scroll-based seeking if not on mobile
