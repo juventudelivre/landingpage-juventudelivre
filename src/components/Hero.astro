@@ -8,12 +8,12 @@
     <video
       id="hero-video"
       class="hero-video"
-      src="https://github.com/juventudelivre/landingpage-juventudelivre/releases/download/media-v1/hero-video.mp4"
       poster="/hero-poster.webp"
       autoplay
       loop
       muted
       playsinline
+      webkit-playsinline
       preload="auto"
       aria-hidden="true"
     >
@@ -320,6 +320,9 @@
     const isMobile = window.innerWidth < 768;
 
     if (isMobile) {
+      video.muted = true;
+      video.setAttribute('muted', '');
+      video.playsInline = true;
       video.autoplay = true;
       video.loop = true;
       video.play().catch(() => {});
